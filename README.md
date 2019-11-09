@@ -1,5 +1,5 @@
-##数据库建表语句：
-####user
+## 数据库建表语句：
+#### user
 ```$user建表语句
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
