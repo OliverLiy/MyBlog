@@ -1,0 +1,11 @@
+.body {
+    background: #efefef;
+}
+.main {
+    margin:30px;
+    background: white;
+}
+.success{
+    float: right;
+    margin-bottom: 15px;
+}
