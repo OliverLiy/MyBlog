@@ -10,6 +10,7 @@ CREATE TABLE `user` (
 )
 ```
 
+#### question
 ```$question建表语句
 CREATE TABLE `question` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
