@@ -18,22 +18,23 @@ public class logincontroller {
     private UserMapper userMapper;
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
+
     @PostMapping("/logincheck")
-    public String checklogin(HttpServletRequest request, HttpServletResponse response){
+    public String checklogin(HttpServletRequest request, HttpServletResponse response) {
         //通过request获取输入的用户名和密码在数据库中查找相关用户，如果存在就登陆成功
-        User user=new User();
-        String name=request.getParameter("username");
-        String password=request.getParameter("password");
+        User user = new User();
+        String name = request.getParameter("username");
+        String password = request.getParameter("password");
         user.setName(name);
         user.setPassword(password);
-        User newUser=userMapper.select(user);
-        if(newUser != null){
-            String token=newUser.getToken();
-            response.addCookie(new Cookie("token",token));
-        }else{
+        User newUser = userMapper.select(user);
+        if (newUser != null) {
+            String token = newUser.getToken();
+            response.addCookie(new Cookie("token", token));
+        } else {
             //登陆失败，重新登陆
         }
         return "redirect:/index";
