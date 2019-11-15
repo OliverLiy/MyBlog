@@ -11,6 +11,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//登陆
 @Controller
 public class logincontroller {
 
@@ -37,6 +38,17 @@ public class logincontroller {
         } else {
             //登陆失败，重新登陆
         }
+        return "redirect:/index";
+    }
+
+    //退出登陆
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,
+                         HttpServletResponse response){
+        request.getSession().removeAttribute("user");
+        Cookie cookie=new Cookie("token",null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
         return "redirect:/index";
     }
 }

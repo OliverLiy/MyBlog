@@ -7,15 +7,16 @@ import com.sdxb.blog.service.QuestionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-//首页
+//个人中心
 @Controller
-public class indexController {
+public class PersonalController {
 
     @Resource
     private UserMapper userMapper;
@@ -23,11 +24,12 @@ public class indexController {
     @Resource
     private QuestionService questionService;
 
-    @GetMapping("/index")
-    public String index(HttpServletRequest request, Model model,
-                        @RequestParam(name = "page", defaultValue = "1") int page,
-                        @RequestParam(name = "size", defaultValue = "5") int size) {
-        //查找cookies，观察是否有token存在
+    @GetMapping("/personal/{action}")
+    public String personal(@PathVariable(name = "action")String action,
+                           Model model,
+                           HttpServletRequest request,
+                           @RequestParam(name = "page",defaultValue = "1")int page,
+                           @RequestParam(name = "size",defaultValue = "5")int size){
         Cookie[] cookies = request.getCookies();
         if (cookies == null) {
             return "login";
@@ -43,9 +45,17 @@ public class indexController {
                 break;
             }
         }
-        PageDto pagination = questionService.list(page, size);
+        if (action.equals("questions")){
+            model.addAttribute("section","questions");
+            model.addAttribute("sectionname","我的问题");
+        }else if (action.equals("information")){
+            model.addAttribute("section","information");
+            model.addAttribute("sectionname","我的消息");
+        }
+
+        PageDto pagination=questionService.list(user.getId(),page,size);
         model.addAttribute("pagination", pagination);
-        return "index";
+        return "personal";
     }
 
 }

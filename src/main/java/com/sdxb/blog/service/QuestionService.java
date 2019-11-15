@@ -32,6 +32,27 @@ public class QuestionService {
         List<Question> questions = questionMapper.list(offset, size);
         List<Questiondto> questiondtoList = new ArrayList<>();
 
+        for (Question question : questions) {
+            User user = userMapper.findById(question.getCreateid());
+            Questiondto questiondto = new Questiondto();
+            //把第一个对象的所有属性拷贝到第二个对象中
+            BeanUtils.copyProperties(question, questiondto);
+            questiondto.setUser(user);
+            questiondtoList.add(questiondto);
+        }
+        pageDto.setQuestions(questiondtoList);
+        return pageDto;
+    }
+
+    public PageDto list(int userid, int page, int size) {
+        PageDto pageDto = new PageDto();
+        int totalcount = questionMapper.countbyid(userid);
+        pageDto.setPagination(totalcount,page,size);
+        //size*{page-1}
+        int offset = size * (page - 1);
+        //每页只展示5条
+        List<Question> questions = questionMapper.listbyid(userid,offset, size);
+        List<Questiondto> questiondtoList = new ArrayList<>();
 
         for (Question question : questions) {
             User user = userMapper.findById(question.getCreateid());
@@ -43,5 +64,15 @@ public class QuestionService {
         }
         pageDto.setQuestions(questiondtoList);
         return pageDto;
+    }
+
+    public Questiondto getbyid(int id) {
+        Questiondto questiondto=new Questiondto();
+        Question question=questionMapper.getbyId(id);
+        //把第一个对象的所有属性拷贝到第二个对象中
+        BeanUtils.copyProperties(question, questiondto);
+        User user = userMapper.findById(question.getCreateid());
+        questiondto.setUser(user);
+        return questiondto;
     }
 }

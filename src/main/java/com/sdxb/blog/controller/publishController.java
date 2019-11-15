@@ -4,9 +4,11 @@ import com.sdxb.blog.entity.Question;
 import com.sdxb.blog.entity.User;
 import com.sdxb.blog.mapper.QuestionMapper;
 import com.sdxb.blog.mapper.UserMapper;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,11 +29,13 @@ public class publishController {
         return "publish";
     }
 
+    //发布问题
     @PostMapping("/publish")
     public String publishquestion(
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("tag") String tag,
+            @RequestParam(value = "id",defaultValue = "-1")int id,
             HttpServletRequest request,
             Model model
     ) {
@@ -67,8 +71,24 @@ public class publishController {
         question.setTag(tag);
         question.setCreateid(user.getId());
         question.setCreatetime(System.currentTimeMillis());
-
-        questionMapper.createquestion(question);
+        if(id==-1){
+            questionMapper.createquestion(question);
+        }else {
+            question.setId(id);
+            questionMapper.updatequestion(question);
+        }
         return "redirect:/index";
+    }
+
+    @GetMapping("/publish/{id}")
+    public String edit(@PathVariable(name = "id")int id,
+                       Model model){
+        Question question=questionMapper.getbyId(id);
+        model.addAttribute("title", question.getTitle());
+        model.addAttribute("description", question.getDescription());
+        model.addAttribute("tag", question.getTag());
+        //用来标识问题是修改而不是重新创建
+        model.addAttribute("id",question.getId());
+        return "publish";
     }
 }

@@ -1,15 +1,27 @@
 .body {
     background: #efefef;
 }
+
 .main {
-    margin:30px;
+    margin: 30px;
     background: white;
 }
-.picset{
-    width:40px;
+
+.picset {
+    width: 40px;
 }
-.common-list{
+
+.common-list {
     font-size: 12px;
     font-weight: normal;
     color: #999;
+}
+
+.personal {
+    margin-top: 15px;
+}
+
+.question-menu {
+    color : #999;
+    font-size: 13px;
 }
