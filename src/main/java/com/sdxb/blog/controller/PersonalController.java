@@ -17,13 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 //个人中心
 @Controller
 public class PersonalController {
-
     @Resource
     private UserMapper userMapper;
-
     @Resource
     private QuestionService questionService;
-
     @GetMapping("/personal/{action}")
     public String personal(@PathVariable(name = "action")String action,
                            Model model,
@@ -57,5 +54,4 @@ public class PersonalController {
         model.addAttribute("pagination", pagination);
         return "personal";
     }
-
 }

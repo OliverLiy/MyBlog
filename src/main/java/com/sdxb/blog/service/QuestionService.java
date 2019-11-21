@@ -75,4 +75,8 @@ public class QuestionService {
         questiondto.setUser(user);
         return questiondto;
     }
+
+    public void increaseview(int id) {
+        questionMapper.updateView(id);
+    }
 }

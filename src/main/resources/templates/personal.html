@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"><!--引入thymeleaf-->
+<meta name="referrer" content="no-referrer" />
 <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 <head>
     <meta charset="utf-8">
@@ -11,8 +12,9 @@
     <link rel="stylesheet" href="/css/index.css">
 </head>
 <body class="body">
+<!--导入导航栏-->
 <div th:insert="~{navigation :: copy}"></div>
-
+<!--个人中心的页面布局-->
 <div class="container-fluid main">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-ss-12">
@@ -22,7 +24,7 @@
                 <div class="media-left">
                     <a href="#">
                         <img class="media-object img-circle picset"
-                             src="https://i2.hdslb.com/bfs/face/f240ea712392e8879edb519f359764e8b2fdc7cc.jpg@72w_72h.webp">
+                             src="https://profile.csdnimg.cn/F/C/F/1_qq_41973594?v=1574041386">
                     </a>
                 </div>
                 <div class="media-body">
@@ -65,8 +67,8 @@
                     </li>
                 </ul>
             </nav>
-
         </div>
+        <!--右侧的导航栏-->
         <div class="col-lg-3 col-md-12 col-sm-12 col-ss-12">
             <div class="list-group personal">
                 <a href="/personal/questions" th:class="${section=='questions'}?'list-group-item active' : 'list-group-item' ">
