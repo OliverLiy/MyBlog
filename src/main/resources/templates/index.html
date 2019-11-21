@@ -30,7 +30,7 @@
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">
-                        <a th:href="@{'/question/'+${question.id}}" th:text="title"></a>
+                        <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}"></a>
                     </h4>
                     <span>
                         <a th:text="${question.description}" th:href="@{'/question/'+${question.id}}"></a>
