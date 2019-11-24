@@ -40,7 +40,7 @@ public class QuestionService {
             questiondto.setUser(user);
             questiondtoList.add(questiondto);
         }
-        pageDto.setQuestions(questiondtoList);
+        pageDto.setData(questiondtoList);
         return pageDto;
     }
 
@@ -62,7 +62,7 @@ public class QuestionService {
             questiondto.setUser(user);
             questiondtoList.add(questiondto);
         }
-        pageDto.setQuestions(questiondtoList);
+        pageDto.setData(questiondtoList);
         return pageDto;
     }
 
@@ -78,5 +78,9 @@ public class QuestionService {
 
     public void increaseview(int id) {
         questionMapper.updateView(id);
+    }
+
+    public List<Question> getbytag(int id, String result) {
+        return questionMapper.getbytag(id,result);
     }
 }

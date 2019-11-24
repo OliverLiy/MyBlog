@@ -34,6 +34,13 @@
             <!--根据session中是否存在user判断展示的内容-->
             <ul class="nav navbar-nav navbar-right">
                 <li th:if="${session.user == null}"><a href="/login">登陆</a></li>
+                <li th:if="${session.user} != null">
+                    <a href="/personal/information">
+                        <span class="glyphicon glyphicon glyphicon-envelope" aria-hidden="true"
+                              style="padding-top: 2px;"></span>
+                        <span  th:text="${session.unreadnum}" style="padding-top: 2px;"></span>
+                    </a>
+                </li>
                 <li th:if="${session.user} != null"><a href="/publish">发布</a></li>
                 <li class="dropdown" th:if="${session.user} != null">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

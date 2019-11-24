@@ -20,4 +20,13 @@ public interface CommentMapper {
 
     @Update("update comment set commentcount=commentcount+1 where id=#{parent_id}")
     void updatecommentcount(int parent_id);
+
+    @Select("select * from comment where id=#{parent_id}")
+    Comment getparentbyid(int parent_id);
+
+    @Select("select content from comment where id=#{outer}")
+    String getcontentbyid(int outerid);
+
+    @Select("select parent_id from comment where id=#{id}")
+    int getparentidbyid(int id);
 }

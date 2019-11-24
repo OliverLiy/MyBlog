@@ -9,3 +9,9 @@
     float: right;
     margin-bottom: 15px;
 }
+
+.label-info{
+    margin-right: 12px;
+    font-size: 17px;
+    white-space: normal;
+}

@@ -21,7 +21,7 @@
             <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 发现 </h2>
             <hr>
             <!--分页展示内容-->
-            <div class="media" th:each="question:${pagination.questions}">
+            <div class="media" th:each="question:${pagination.data}" style="margin-top: 22px">
                 <div class="media-left">
                     <a th:href="@{'/question/'+${question.id}}">
                         <img class="media-object img-circle picset"
@@ -29,7 +29,7 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading">
+                    <h4 class="media-heading" style="font-size: 17px;">
                         <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}"></a>
                     </h4>
                     <span>

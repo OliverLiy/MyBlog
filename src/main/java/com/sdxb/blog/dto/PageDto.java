@@ -4,9 +4,9 @@ package com.sdxb.blog.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PageDto {
+public class PageDto<T> {
     //问题内容
-    private List<Questiondto> questions;
+    private List<T> data;
     //是否展示前一页
     private boolean showPre;
     //是否展示后一页
@@ -15,6 +15,8 @@ public class PageDto {
     private boolean showfirst;
     //是否展示最后一页
     private boolean showlast;
+
+
     //当前页码
     private int page;
     //当前展示的页码集合
@@ -79,12 +81,12 @@ public class PageDto {
         this.totalpage = totalpage;
     }
 
-    public List<Questiondto> getQuestions() {
-        return questions;
+    public List<T> getData() {
+        return data;
     }
 
-    public void setQuestions(List<Questiondto> questions) {
-        this.questions = questions;
+    public void setData(List<T> data) {
+        this.data = data;
     }
 
     public boolean isShowPre() {

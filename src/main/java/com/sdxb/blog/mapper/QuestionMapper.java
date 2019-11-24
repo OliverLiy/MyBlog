@@ -1,6 +1,5 @@
 package com.sdxb.blog.mapper;
 
-import com.sdxb.blog.dto.Questiondto;
 import com.sdxb.blog.entity.Question;
 import org.apache.ibatis.annotations.*;
 
@@ -11,7 +10,7 @@ public interface QuestionMapper {
     @Insert("insert into question(title,description,createid,tag,createtime) values (#{title},#{description},#{createid},#{tag},#{createtime})")
     void createquestion(Question question);
 
-    @Select("select * from question limit #{offset},#{size}")
+    @Select("select * from question order by createtime desc limit #{offset},#{size} ")
     List<Question> list(@Param("offset") int offset, @Param("size") int size);
 
     @Select("select count(1) from question")
@@ -34,5 +33,11 @@ public interface QuestionMapper {
 
     @Update("update question set comment_count=comment_count+1 where id=#{parent_id}")
     void updatecomment(int parent_id);
+
+    @Select("select * from question where tag REGEXP #{result} and id!=#{id} limit 0,10")
+    List<Question> getbytag(@Param("id") int id, @Param("result") String result);
+
+    @Select("select title from question where id=#{outerid}")
+    String gettitlebyid(int outerid);
 
 }

@@ -29,8 +29,18 @@
                     阅读数： <span th:text="${questionDto.view_count}"></span>
             </span>
                 <hr>
+                <!--内容-->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-ss-12" th:text="${questionDto.description}"/>
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-ss-12">
+                <!--标签-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-ss-12">
+                    <span class="label label-info" th:each="tag : ${questionDto.tag.split(',')}" style="margin-right: 10px;">
+                        <span class="label label-info" th:text="${tag}"></span>
+                    </span>
+
+                </div>
+                <hr class="col-lg-12 col-md-12 col-sm-12 col-ss-12">
+                <!--编辑-->
                 <a th:href="@{'/publish/'+${questionDto.id}}"
                    th:if="${session.user!=null && session.user.id==questionDto.createid}">
                 <span class="glyphicon glyphicon-pencil question-menu" aria-hidden="true">
@@ -59,34 +69,14 @@
                             <!--点赞评论时间-->
                             <div class="question-menu">
                                 <span class="glyphicon glyphicon-thumbs-up icon" aria-hidden="true"></span>
+                                <!--回复按钮-->
                                 <span class="glyphicon glyphicon-comment icon" aria-hidden="true"
                                       th:data-id="${comment.id}" th:data-check="1" onclick="secondcomment(this)" th:text="${comment.commentcount}"></span>
                                 <span th:text="${#dates.format(comment.createtime,'yyyy-MM-dd')}"></span>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-ss-12 collapse sub-comment"
                                  th:id="${'comment-'+comment.id}">
-                                <!--二级评论-->
-<!--                                <div class="col-lg-12 col-md-12 col-sm-12 col-ss-12" th:each="comment:${comments}">-->
-<!--                                    <div class="media">-->
-<!--                                        <div class="media-left">-->
-<!--                                            <img class="media-object img-rounded picset"-->
-<!--                                                 src="https://profile.csdnimg.cn/F/C/F/1_qq_41973594?v=1574041386">-->
-<!--                                        </div>-->
-<!--                                        <div class="media-body">-->
-<!--                                            <h4 class="media-heading">-->
-<!--                                                <span th:text="${comment.user.name}"/>-->
-<!--                                                <div style="font-size: 15px; margin-top:5px;"-->
-<!--                                                     th:text="${comment.content}">-->
-<!--                                                </div>-->
-<!--                                                <div class="question-menu">-->
-<!--                                                    <span th:text="${#dates.format(comment.createtime,'yyyy-MM-dd')}"-->
-<!--                                                          style="float: right"></span>-->
-<!--                                                </div>-->
-<!--                                            </h4>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <hr>-->
-<!--                                </div>-->
+                                <!--二级评论插入到这里-->
                                 <!--二级评论输入框-->
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-ss-12" style="margin-top: 10px;">
                                     <input type="text" class="form-control" placeholder="评论一下....." th:id="${'input-'+comment.id}">
@@ -139,8 +129,12 @@
                 </div>
             </div>
             <hr class="col-lg-12 col-md-12 col-sm-12 col-ss-12">
+            <!--相关问题-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-ss-12">
                 <h4>相关问题</h4>
+                <div th:each="relative:${relativequestion}">
+                    <a th:href="@{'/question/'+${relative.id}}" th:text="${relative.title}"></a>
+                </div>
             </div>
         </div>
     </div>

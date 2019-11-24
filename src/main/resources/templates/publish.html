@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/publish.css"/>
     <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <script src="/js/community.js" type="application/javascript"></script>
 </head>
 <body class="body">
 <!--导入导航栏-->
@@ -25,17 +26,38 @@
                 <input type="hidden" name="id" th:value="${id}">
                 <div class="form-group">
                     <label for="title">问题标题</label>
-                    <input type="text" class="form-control" th:value="${title}" id="title" name="title">
+                    <input type="text" class="form-control" th:value="${title}" id="title" name="title" autocomplete="off" >
                 </div>
                 <div class="form-group">
                     <label for="description">问题补充</label>
                     <textarea class="form-control" name="description" id="description" th:text="${description}"
-                              cols="20" rows="18"></textarea>
+                              cols="20" rows="15"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="tag">添加标签</label>
-                    <input type="text" class="form-control" id="tag" th:value="${tag}" name="tag">
+                    <input type="text" class="form-control" id="tag" autocomplete="off"
+                           th:value="${tag}" name="tag" onclick="showselecttag()">
                 </div>
+                <!--标签页-->
+                <div id="select-tags" style="display: none">
+                    <ul class="nav nav-tabs" role="tablist">
+
+                        <li role="presentation" th:each="category,status:${tags}" th:class="${status.first ? 'active':''}">
+                            <a th:href="@{'#'+${category.categoryname}}" aria-controls="home"
+                               role="tab" data-toggle="tab" th:text="${category.categoryname}">
+                            </a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content" style="padding-top: 15px;">
+                        <div role="tabpanel" th:each="category,status:${tags}"
+                             th:class="${status.first ? 'active tab-pane':'tab-pane'}" th:id="${category.categoryname}">
+                            <span class="label label-info" onclick="selectTag(this)"
+                                  th:each="selecttags:${category.tags}" th:text="${selecttags}" th:data-tag="${selecttags}"></span>
+                        </div>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-success success" style="float: right">提交</button>
                 <span class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}!= null"></span>
             </form>

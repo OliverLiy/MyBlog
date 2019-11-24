@@ -25,7 +25,20 @@ CREATE TABLE `question` (
   PRIMARY KEY (`id`)
 ) 
 ```
-
+#### comment
+```$user建表语句
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `commentor` int(11) DEFAULT NULL,
+  `createtime` bigint(20) DEFAULT NULL,
+  `like_count` int(11) DEFAULT '0',
+  `content` varchar(200) NOT NULL,
+  `commentcount` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) 
+```
 ## thymeleaf官方文档
 ```
 https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html

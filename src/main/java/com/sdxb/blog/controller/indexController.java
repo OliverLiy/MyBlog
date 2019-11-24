@@ -2,6 +2,7 @@ package com.sdxb.blog.controller;
 
 import com.sdxb.blog.dto.PageDto;
 import com.sdxb.blog.entity.User;
+import com.sdxb.blog.mapper.NotificationMapper;
 import com.sdxb.blog.mapper.UserMapper;
 import com.sdxb.blog.service.QuestionService;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,8 @@ public class indexController {
 
     @Resource
     private QuestionService questionService;
+    @Resource
+    private NotificationMapper notificationMapper;
 
     @GetMapping("/index")
     public String index(HttpServletRequest request, Model model,
@@ -39,6 +42,9 @@ public class indexController {
                 user = userMapper.findBytoken(token);
                 if (user != null) {
                     request.getSession().setAttribute("user", user);
+                    //获取未读的消息数量
+                    int unreadnum=notificationMapper.getunreadcount(user.getId());
+                    request.getSession().setAttribute("unreadnum",unreadnum);
                 }
                 break;
             }

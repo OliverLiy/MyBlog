@@ -1,5 +1,7 @@
 package com.sdxb.blog.controller;
 
+import com.sdxb.blog.Cache.TagCache;
+import com.sdxb.blog.dto.TagDto;
 import com.sdxb.blog.entity.Question;
 import com.sdxb.blog.entity.User;
 import com.sdxb.blog.mapper.QuestionMapper;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
+//问题发布
 @Controller
 public class publishController {
 
@@ -25,7 +29,11 @@ public class publishController {
     private QuestionMapper questionMapper;
 
     @GetMapping("/publish")
-    public String publish() {
+    public String publish(Model model) {
+        //标签组
+        TagCache tagCache=new TagCache();
+        List<TagDto> tags = tagCache.gettags();
+        model.addAttribute("tags",tags);
         return "publish";
     }
 
@@ -42,6 +50,10 @@ public class publishController {
         model.addAttribute("title", title);
         model.addAttribute("description", description);
         model.addAttribute("tag", tag);
+        //标签组
+        TagCache tagCache=new TagCache();
+        List<TagDto> tags = tagCache.gettags();
+        model.addAttribute("tags",tags);
         //防止输入的问题为空
         if (title == null || title == "") {
             model.addAttribute("error", "标题不能为空");
