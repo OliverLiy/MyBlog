@@ -1,6 +1,6 @@
 耗时大约三个星期不到的时间，把这个论坛项目基本上算是完成了，做这个项目最主要的目的是熟悉SpringBoot的使用，然后通过整个项目了解了BootStrap、Thymeleaf、editor.md等等工具的使用
 项目的一些东西我都放在了我的csdn博客上，大家可以去看看，包括如何跑起来等等
-https://mp.csdn.net/postedit/103288287
+https://blog.csdn.net/qq_41973594/article/details/103288287
 
 
 ## 数据库建表语句：
