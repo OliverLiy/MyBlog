@@ -58,7 +58,7 @@ function secondcomment(e) {
 
                     var imgElement = $("<img/>", {
                         "class": "media-object img-rounded picset",
-                        "src": pic
+                        "src": comment.user.headpic
                     });
 
                     var medialeftElement = $("<div/>", {
