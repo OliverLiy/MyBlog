@@ -40,4 +40,6 @@ public interface QuestionMapper {
     @Select("select title from question where id=#{outerid}")
     String gettitlebyid(int outerid);
 
+    @Select("select * from question order by view_count desc limit 0,10")
+    List<Question> gettopten();
 }

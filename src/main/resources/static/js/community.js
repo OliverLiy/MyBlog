@@ -58,7 +58,7 @@ function secondcomment(e) {
 
                     var imgElement = $("<img/>", {
                         "class": "media-object img-rounded picset",
-                        "src": "https://profile.csdnimg.cn/F/C/F/1_qq_41973594?v=1574041386"
+                        "src": pic
                     });
 
                     var medialeftElement = $("<div/>", {

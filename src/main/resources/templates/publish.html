@@ -11,6 +11,12 @@
     <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <script src="/js/community.js" type="application/javascript"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!--editor.md相关-->
+    <link rel="stylesheet" href="/css/editormd.css">
+    <script src="/js/editormd.js"></script>
 </head>
 <body class="body">
 <!--导入导航栏-->
@@ -28,12 +34,24 @@
                     <label for="title">问题标题</label>
                     <input type="text" class="form-control" th:value="${title}" id="title" name="title" autocomplete="off" >
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="question-editor">
                     <label for="description">问题补充</label>
                     <textarea class="form-control" name="description" id="description" th:text="${description}"
-                              cols="20" rows="15"></textarea>
+                              cols="20" rows="15" style="display:none;"></textarea>
                 </div>
-                <div class="form-group">
+                <!--editor.md相关-->
+                <script type="text/javascript">
+                    $(function() {
+                        var editor = editormd("question-editor", {
+                            width  : "100%",
+                            height : 600,
+                            path   : "/js/lib/",
+                            watch : false
+                        });
+                    });
+                </script>
+
+                <div class="form-group" >
                     <label for="tag">添加标签</label>
                     <input type="text" class="form-control" id="tag" autocomplete="off"
                            th:value="${tag}" name="tag" onclick="showselecttag()">
@@ -70,8 +88,5 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>

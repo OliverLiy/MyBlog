@@ -83,4 +83,9 @@ public class QuestionService {
     public List<Question> getbytag(int id, String result) {
         return questionMapper.getbytag(id,result);
     }
+
+    public List<Question> gettopten() {
+        List<Question> questions=questionMapper.gettopten();
+        return questions;
+    }
 }

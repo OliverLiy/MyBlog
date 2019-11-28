@@ -5,6 +5,7 @@ public class User {
     private String name;
     private String password;
     private String token;
+    private String headpic;
 
     public User() {
     }
@@ -45,5 +46,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getHeadpic() {
+        return headpic;
+    }
+
+    public void setHeadpic(String headpic) {
+        this.headpic = headpic;
     }
 }

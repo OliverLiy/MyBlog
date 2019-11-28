@@ -1,8 +1,10 @@
 package com.sdxb.blog.controller;
 
 import com.sdxb.blog.dto.PageDto;
+import com.sdxb.blog.entity.Question;
 import com.sdxb.blog.entity.User;
 import com.sdxb.blog.mapper.NotificationMapper;
+import com.sdxb.blog.mapper.QuestionMapper;
 import com.sdxb.blog.mapper.UserMapper;
 import com.sdxb.blog.service.QuestionService;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 //首页
 @Controller
@@ -29,7 +32,7 @@ public class indexController {
     @GetMapping("/index")
     public String index(HttpServletRequest request, Model model,
                         @RequestParam(name = "page", defaultValue = "1") int page,
-                        @RequestParam(name = "size", defaultValue = "5") int size) {
+                        @RequestParam(name = "size", defaultValue = "10") int size) {
         //查找cookies，观察是否有token存在
         Cookie[] cookies = request.getCookies();
         if (cookies == null) {
@@ -51,6 +54,10 @@ public class indexController {
         }
         PageDto pagination = questionService.list(page, size);
         model.addAttribute("pagination", pagination);
+
+        //获取阅读量最高的十篇问题
+        List<Question> questions= questionService.gettopten();
+        model.addAttribute("topquestion",questions);
         return "index";
     }
 

@@ -68,7 +68,7 @@ public class CommentController {
         commentMapper.insert(comment);
 
         if (commentCreateDto.getType()==2){
-            //把回复回复的通知插入数据库
+            //把回复评论的通知插入数据库
             Notification notification=new Notification();
             notification.setNotifier(comment.getCommentor());
             Comment comment2=commentMapper.getparentbyid(commentCreateDto.getParent_id());

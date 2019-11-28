@@ -39,6 +39,20 @@ CREATE TABLE `comment` (
   PRIMARY KEY (`id`)
 ) 
 ```
+#### notification
+```$notification建表语句
+CREATE TABLE `notification` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `notifier` int(11) NOT NULL,
+  `receiver` int(11) NOT NULL,
+  `outerid` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `createtime` bigint(20) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) 
+```
+
 ## thymeleaf官方文档
 ```
 https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html
@@ -46,4 +60,8 @@ https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html
 ## BootStrap官方文档
 ```
 https://v3.bootcss.com/components/
+```
+## Editor.md官网
+```
+http://editor.md.ipandao.com/
 ```

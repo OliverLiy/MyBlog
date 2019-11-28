@@ -29,6 +29,7 @@ public class NotificationService {
     @Resource
     private CommentMapper commentMapper;
 
+    //返回一个PageDto
     public PageDto list(int id, int page, int size) {
         PageDto pageDto = new PageDto();
         int totalcount = notificationMapper.count(id);
@@ -37,6 +38,8 @@ public class NotificationService {
         List<Notification> notifications = notificationMapper.list(id, offset, size);
         List<NotificationDto> notificationDtoList = new ArrayList<>();
 
+        //将notification插入到notificationDto中，再将user信息也插入到notificationDto中
+        //最后插入到notificationDtoList列表里
         for (Notification notification : notifications) {
             User user = userMapper.findById(notification.getNotifier());
             NotificationDto notificationDto = new NotificationDto();
@@ -56,6 +59,7 @@ public class NotificationService {
             notificationDto.setOutercontent(outercontent);
             notificationDtoList.add(notificationDto);
         }
+        //在pageDto中插入notificationDtoList
         pageDto.setData(notificationDtoList);
         return pageDto;
     }

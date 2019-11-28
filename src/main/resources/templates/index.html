@@ -25,20 +25,18 @@
                 <div class="media-left">
                     <a th:href="@{'/question/'+${question.id}}">
                         <img class="media-object img-circle picset"
-                             src="https://profile.csdnimg.cn/F/C/F/1_qq_41973594?v=1574041386">
+                             th:src="${question.user.headpic}">
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" style="font-size: 17px;">
+                    <span style="margin-top: 10px;">
+                        <h4 class="media-heading" style="font-size: 17px;">
                         <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}"></a>
-                    </h4>
-                    <span>
-                        <a th:text="${question.description}" th:href="@{'/question/'+${question.id}}"></a>
+                        </h4>
                     </span>
-                    <br>
                     <span class="common-list"><span th:text="${question.comment_count}"/> 个评论 • <span
-                            th:text="${question.view_count}"/> 次浏览 • <span th:text="${question.like_count}"/>个点赞 <span
-                            th:text="${#dates.format(question.createtime,'dd MMMM yyyy')}"></span></span>
+                            th:text="${question.view_count}"/> 次浏览 • <span th:text="${question.like_count}"/>个点赞
+                        <span th:text="${#dates.format(question.createtime,'yyyy-MM-dd')}" style="float: right;"></span></span>
                 </div>
             </div>
             <!--展示底部的页码-->
@@ -72,7 +70,24 @@
         </div>
         <!--热门话题部分-->
         <div class="col-lg-3 col-md-12 col-sm-12 col-ss-12">
+            <h3>站长</h3>
+            <a href="https://github.com/OliverLiy">
+                <img class="adminicon" src="../img/GitHub.png">
+            </a>
+            <a href="https://im.qq.com/">
+                <img class="adminicon" src="../img/qq.jpg"/>
+            </a>
+            <a href="https://blog.csdn.net/qq_41973594">
+                <img class="adminicon" src="../img/csdn.jpg"/>
+            </a>
+            <hr>
             <h3>热门话题</h3>
+            <ul class="list-group">
+                <li class="list-group-item"  th:each="question:${topquestion}">
+                    <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}"></a>
+                </li>
+            </ul>
+
         </div>
     </div>
 </div>

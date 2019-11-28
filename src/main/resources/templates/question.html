@@ -12,6 +12,14 @@
     <link rel="stylesheet" href="/css/index.css">
     <script src="/js/community.js" type="application/javascript"></script>
     <script src="/js/moment.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!--editor.md相关-->
+    <link rel="stylesheet" href="/css/editormd.preview.css">
+    <script src="/js/editormd.js"></script>
+    <script src="/js/lib/marked.min.js"></script>
+    <script src="/js/lib/prettify.min.js"></script>
 </head>
 <body class="body">
 <!--导入导航栏-->
@@ -30,7 +38,16 @@
             </span>
                 <hr>
                 <!--内容-->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-ss-12" th:text="${questionDto.description}"/>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-ss-12" id="question-view">
+                    <textarea style="display: none" th:text="${questionDto.description}"></textarea>
+                </div>
+                <script type="text/javascript">
+                    $(function() {
+                        editormd.markdownToHTML("question-view", {
+                        });
+                    });
+                </script>
+
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-ss-12">
                 <!--标签-->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-ss-12">
@@ -59,7 +76,7 @@
                 <div class="media">
                     <div class="media-left">
                         <img class="media-object img-rounded picset"
-                             src="https://profile.csdnimg.cn/F/C/F/1_qq_41973594?v=1574041386">
+                             th:src="${comment.user.headpic}">
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading">
@@ -96,7 +113,7 @@
                 <div class="media" style="margin-bottom: 20px">
                     <div class="media-left">
                         <img class="media-object img-rounded picset"
-                             src="https://profile.csdnimg.cn/F/C/F/1_qq_41973594?v=1574041386">
+                             th:src="${session.user.headpic}">
                     </div>
                     <div class="media-body" style="padding-top:10px;">
                         <h4 class="media-heading">
@@ -119,7 +136,7 @@
                 <div class="media">
                     <div class="media-left">
                         <img class="media-object img-circle picset"
-                             src="https://profile.csdnimg.cn/F/C/F/1_qq_41973594?v=1574041386">
+                             th:src="${session.user.headpic}">
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading">
@@ -132,15 +149,15 @@
             <!--相关问题-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-ss-12">
                 <h4>相关问题</h4>
-                <div th:each="relative:${relativequestion}">
-                    <a th:href="@{'/question/'+${relative.id}}" th:text="${relative.title}"></a>
-                </div>
+                <ul class="list-group">
+                    <li class="list-group-item"  th:each="relative:${relativequestion}">
+                        <a th:href="@{'/question/'+${relative.id}}" th:text="${relative.title}"></a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="/js/bootstrap.min.js"></script>
+
 </body>
 </html>
