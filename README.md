@@ -11,8 +11,9 @@ CREATE TABLE `user` (
   `name` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `token` varchar(45) NOT NULL,
+  `headpic` varchar(1024) NOT NULL DEFAULT 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574701469761&di=0e1045169debf1aed834fc97ff9b2439&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F31%2F87%2F96573b585a7c9c4.jpg',
   PRIMARY KEY (`id`)
-)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8
 ```
 
 #### question
@@ -28,7 +29,7 @@ CREATE TABLE `question` (
   `tag` varchar(250) NOT NULL,
   `createtime` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) 
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8
 ```
 #### comment
 ```$user建表语句
@@ -42,7 +43,7 @@ CREATE TABLE `comment` (
   `content` varchar(200) NOT NULL,
   `commentcount` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) 
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8
 ```
 #### notification
 ```$notification建表语句
@@ -55,7 +56,7 @@ CREATE TABLE `notification` (
   `createtime` bigint(20) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) 
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8
 ```
 
 ## thymeleaf官方文档
