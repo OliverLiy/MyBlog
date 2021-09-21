@@ -12,7 +12,7 @@ public interface CommentMapper {
             "values (#{parent_id},#{type},#{commentor},#{createtime},#{content})")
     void insert(Comment comment);
 
-    @Select("select * from comment where parent_id=#{id} order by createtime desc")
+    @Select("select * from comment where parent_id=#{id} and type=1 order by createtime desc")
     List<Comment> getByid(int id);
 
     @Select("select * from comment where parent_id=#{id} and type=#{type} order by createtime desc")

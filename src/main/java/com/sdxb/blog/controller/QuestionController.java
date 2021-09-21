@@ -72,8 +72,8 @@ public class QuestionController {
             msg.append("|");
         }
         String result=msg.substring(0,msg.length()-1);
-        List<Question> relativequestion =questionService.getbytag(id,result);
-        model.addAttribute("relativequestion",relativequestion);
+        List<Question> relativeQuestion =questionService.getbytag(id,result);
+        model.addAttribute("relativeQuestion",relativeQuestion);
 
         return "question";
     }

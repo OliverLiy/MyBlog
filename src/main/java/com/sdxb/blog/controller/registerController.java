@@ -33,6 +33,8 @@ public class registerController {
         user.setName(username);
         user.setPassword(password);
         user.setToken(token);
+        //设置一个默认的头像
+        user.setHeadpic("https://gitee.com/lyucoding/java-starter/raw/main/images/GitHub.png");
         userMapper.insert(user);
         //如果用户注册成功，则把用户信息写进session，直接跳转到主页
         if (userMapper.select(user) != null) {
