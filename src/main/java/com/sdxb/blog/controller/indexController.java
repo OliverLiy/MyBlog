@@ -29,7 +29,7 @@ public class indexController {
     @Resource
     private NotificationMapper notificationMapper;
 
-    @GetMapping("/index")
+    @GetMapping(value = {"/index","/"})
     public String index(HttpServletRequest request, Model model,
                         @RequestParam(name = "page", defaultValue = "1") int page,
                         @RequestParam(name = "size", defaultValue = "10") int size) {

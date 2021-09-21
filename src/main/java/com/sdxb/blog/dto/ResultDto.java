@@ -6,6 +6,15 @@ public class ResultDto<T> {
     private String message;
     private T data;
 
+    public ResultDto() {
+    }
+
+    public ResultDto(int code, String message, T data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
+
     public ResultDto success(){
         ResultDto resultDto=new ResultDto();
         resultDto.setCode(200);

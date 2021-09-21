@@ -19,7 +19,7 @@ public class logincontroller {
     private UserMapper userMapper;
 
     @GetMapping("/login")
-    public String login() {
+    public String login(HttpServletRequest request, HttpServletResponse response) {
         return "login";
     }
 

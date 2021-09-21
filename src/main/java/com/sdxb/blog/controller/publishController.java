@@ -6,7 +6,6 @@ import com.sdxb.blog.entity.Question;
 import com.sdxb.blog.entity.User;
 import com.sdxb.blog.mapper.QuestionMapper;
 import com.sdxb.blog.mapper.UserMapper;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
